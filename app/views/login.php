@@ -1,7 +1,7 @@
 <div class="text-center d-flex align-items-center justify-content-center vh-100">
     <main class="form-signin w-100 m-auto" style="max-width: 380px;">
         <form>
-            <img class="mb-4" src="https://img.freepik.com/vetores-premium/vetor-de-icone-de-design-de-logotipo-de-livro_9850-5270.jpg" alt="" width="72" height="57">
+            <img class="mb-4" src="public/img/logoDark.png" alt="Logo"  height="100">
             <h1 class="h3 mb-3 fw-normal">Login</h1>
 
             <div class="form-floating mb-3">

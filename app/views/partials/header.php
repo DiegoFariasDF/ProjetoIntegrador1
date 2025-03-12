@@ -12,7 +12,7 @@
 <header class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top sticky-top">
     <div class="container">
     
-        <a class="navbar-brand fs-2 fw-bold" href="?pagina="><!--<img src="public/img/logo1.png" alt="">-->Livro Em Dia</a>
+        <a class="navbar-brand fs-2 fw-bold" href="?pagina="><img src="public/img/logo.png" alt="Logo" height="50px"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark" aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
         
         <img src="public/img/hamburger.png" alt="">
@@ -24,7 +24,7 @@
                 <a class="nav-link " aria-current="page" href="?pagina=home">Home</a>
             </li>
             <li class="nav-item me-3">
-                <a class="nav-link" href="#projetos">Sobre</a>
+                <a class="nav-link" href="?pagina=leitores">Leitores</a>
             </li>
             <li class="nav-item me-3">
                 <a class="nav-link" href="#fale-conosco">Contato</a>

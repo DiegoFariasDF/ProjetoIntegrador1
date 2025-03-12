@@ -10,14 +10,16 @@ switch ($pagina) {
         include("app/views/home.php");
         break;
 
-    case "usuarios":
-        require_once "app/controllers/UsuarioController.php";
-        $controller = new UsuarioController();
-        $controller->listarUsuarios(); // Chama a função que carrega a view com os dados
+    case "leitores":
+        require_once "app/controllers/LeitorController.php";
+        $controller = new LeitorController();
+        $controller->listarLeitores();
         break;
 
-    case "usuario":
-        include("app/views/usuario.php");
+    case "leitor":
+        require_once "app/controllers/LeitorController.php";
+        $controller = new LeitorController();
+        $controller->mostrarLeitor();
         break;
 
     default:

@@ -3,7 +3,7 @@
 <footer class="container pt-3 my-4 border-top">
     <div class="row text-center text-md-start">
         <div class="col-12 col-md-3">
-            <img class="mb-2" src="https://img.freepik.com/vetores-premium/vetor-de-icone-de-design-de-logotipo-de-livro_9850-5270.jpg" alt="" width="24" height="24">
+            <img class="mb-2" src="public/img/logoRedondoDark.png" alt="" width="24" height="24">
             <small class="d-block mb-3 text-muted"> &copy; Todos os direitos reservados Livro em Dia - Desenvolvido por Alunos da UNIVESP - 2025</small>
         </div>
         <div class="col-6 col-sm-6 col-md-3">

@@ -1,7 +1,7 @@
 <?php
 require_once 'app/config/Database.php';
 
-class UsuarioModel {
+class LeitorModel {
     private $conexao;
 
     public function __construct() {
@@ -23,7 +23,15 @@ class UsuarioModel {
         $stmt->execute();
         $result = $stmt->get_result();
         
-        return $result->fetch_assoc(); // Retorna um único usuário como array associativo
+        return $result->fetch_assoc(); 
     }
+
+    public function contarLeitores() {
+        $sql = "SELECT COUNT(*) AS total FROM leitores";
+        $result = $this->conexao->query($sql);
+        $data = $result->fetch_assoc();
+        return $data['total'];
+    }
+
 }
 ?>

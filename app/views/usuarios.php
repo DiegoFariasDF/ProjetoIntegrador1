@@ -8,7 +8,7 @@
                     <h5>Relatório de Clientes</h5>
                 </div>
                 <div class="card-body">
-                    <p>Total de Clientes Cadastrados: <strong>5</strong></p>
+                    <p>Total de Clientes Cadastrados: <strong><?= $totalLeitores ?></strong></p>
                     <p>Clientes que estão alugando um livro: <strong>3</strong></p>
                 </div>
             </div>
@@ -31,14 +31,14 @@
                 </tr>
             </thead>
             <tbody id="client-list">
-                <?php if (!empty($usuarios)): ?>
-                    <?php foreach ($usuarios as $usuario): ?>
+                <?php if (!empty($leitores)): ?>
+                    <?php foreach ($leitores as $leitores): ?>
                         <tr>
-                            <td><?= htmlspecialchars($usuario['id']) ?></td>
-                            <td class="nome"><?= htmlspecialchars($usuario['nome']) ?></td>
-                            <td class="telefone"><?= htmlspecialchars($usuario['usuario']) ?></td>
+                            <td><?= htmlspecialchars($leitores['id']) ?></td>
+                            <td class="nome"><?= htmlspecialchars($leitores['nome']) ?></td>
+                            <td class="telefone"><?= htmlspecialchars($leitores['telefone']) ?></td>
                             <td>
-                                <a class="btn btn-secondary btn-sm" href="?pagina=usuario&id=<?= $usuario['id'] ?>">Visualizar usuário</a>
+                                <a class="btn btn-secondary btn-sm" href="?pagina=leitor&id=<?= $leitores['id'] ?>">Visualizar usuário</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -67,3 +67,5 @@
         });
     });
 </script>
+
+
