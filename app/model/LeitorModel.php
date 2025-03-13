@@ -33,5 +33,13 @@ class LeitorModel {
         return $data['total'];
     }
 
+    public function atualizarLeitor($id, $nome, $telefone) {
+        $sql = "UPDATE leitores SET nome = ?, telefone = ? WHERE id = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("ssi", $nome, $telefone, $id);
+        return $stmt->execute();
+    }    
+    
+
 }
 ?>

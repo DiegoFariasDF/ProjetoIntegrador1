@@ -21,6 +21,18 @@ switch ($pagina) {
         $controller = new LeitorController();
         $controller->mostrarLeitor();
         break;
+    
+    case "editar_leitor":
+        require_once "app/controllers/LeitorController.php";
+        $controller = new LeitorController();
+        $controller->editarLeitor();
+        break;
+    
+    case "atualizar_leitor":
+        require_once "app/controllers/LeitorController.php";
+        $controller = new LeitorController();
+        $controller->atualizarLeitor();
+        break;
 
     default:
         include("app/views/login.php");

@@ -28,5 +28,37 @@ class LeitorController {
             echo "<p><strong>ID inválido.</strong></p>";
         }
     }
+
+    public function editarLeitor() {
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $idLeitor = $_GET['id'];
+            $leitor = $this->model->getLeitorPorId($idLeitor);
+    
+            if ($leitor) {
+                require 'app/views/editar_leitor.php'; // Envia $leitor para a view
+            } else {
+                echo "<p><strong>Leitor não encontrado.</strong></p>";
+            }
+        } else {
+            echo "<p><strong>ID inválido.</strong></p>";
+        }
+    }
+    
+    public function atualizarLeitor() {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $id = $_POST['id'];
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+    
+            if (!empty($id) && !empty($nome) && !empty($telefone)) {
+                $this->model->atualizarLeitor($id, $nome, $telefone);
+                header("Location: ?pagina=leitor&id=$id");
+                exit();
+            } else {
+                echo "<p><strong>Todos os campos são obrigatórios.</strong></p>";
+            }
+        }
+    }
+    
 }
 ?>

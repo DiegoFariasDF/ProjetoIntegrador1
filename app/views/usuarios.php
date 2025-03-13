@@ -1,22 +1,22 @@
 <div class="container mt-5">
-    <h2 class="mb-4">Lista de Clientes</h2>
+    <h2 class="mb-4">Lista de Leitores</h2>
 
     <div class="row">
         <div class="col-md-6">
             <div class="card bg-light">
                 <div class="card-header bg-secondary text-white">
-                    <h5>Relatório de Clientes</h5>
+                    <h5>Relatório de Leitores</h5>
                 </div>
                 <div class="card-body">
-                    <p>Total de Clientes Cadastrados: <strong><?= $totalLeitores ?></strong></p>
-                    <p>Clientes que estão alugando um livro: <strong>3</strong></p>
+                    <p>Total de Leitores Cadastrados: <strong><?= $totalLeitores ?></strong></p>
+                    <p>Leitores que estão alugando um livro: <strong>3</strong></p>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="mb-4">
-        <label for="search" class="form-label">Pesquisar Cliente:</label>
+        <label for="search" class="form-label">Pesquisar Leitor:</label>
         <input type="text" id="search" class="form-control" placeholder="Digite o nome ou telefone">
     </div>
 
