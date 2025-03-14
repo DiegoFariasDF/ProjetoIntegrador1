@@ -60,5 +60,25 @@ class LeitorController {
         }
     }
     
+    public function exibirFormulario() {
+        require_once "app/views/adicionar_leitor.php"; // Garante que o formulário é carregado
+    }
+    
+
+    public function adicionarLeitor() {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $nome = $_POST['nome'];
+            $telefone = $_POST['telefone'];
+    
+            if (!empty($nome) && !empty($telefone)) {
+                $this->model->adicionarLeitor($nome, $telefone);
+                header("Location: ?pagina=leitores");
+                exit();
+            } else {
+                echo "<p><strong>Todos os campos são obrigatórios.</strong></p>";
+            }
+        }
+    }
+    
 }
 ?>

@@ -33,7 +33,7 @@
                 <p><strong>6. Contato</strong></p>
                 <p>Para esclarecimento de dúvidas ou solicitações relacionadas a este Termo de Privacidade e Uso, entre em contato com os Desenvolvedores por meio dos canais oficiais fornecidos.</p>
 
-                <p><strong>Data de Vigência:</strong> [Inserir data]</p>
+                <p><strong>Data de Vigência:</strong> Vitalícia</p>
 
                 <p>Ao utilizar este software, o usuário declara estar ciente e concordar com os termos acima.</p>
             </div>

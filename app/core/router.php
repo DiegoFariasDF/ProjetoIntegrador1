@@ -33,6 +33,18 @@ switch ($pagina) {
         $controller = new LeitorController();
         $controller->atualizarLeitor();
         break;
+    
+    case "adicionar_leitor":
+        require_once "app/controllers/LeitorController.php";
+        $controller = new LeitorController();
+        $controller->exibirFormulario(); 
+        break;
+    
+    case "salvar_leitor": 
+        require_once "app/controllers/LeitorController.php";
+        $controller = new LeitorController();
+        $controller->adicionarLeitor();
+        break;
 
     default:
         include("app/views/login.php");

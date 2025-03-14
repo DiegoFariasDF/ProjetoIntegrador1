@@ -39,6 +39,13 @@ class LeitorModel {
         $stmt->bind_param("ssi", $nome, $telefone, $id);
         return $stmt->execute();
     }    
+
+    public function adicionarLeitor($nome, $telefone) {
+        $sql = "INSERT INTO leitores SET nome = ?, telefone = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("ss", $nome, $telefone);
+        return $stmt->execute();
+    }
     
 
 }
