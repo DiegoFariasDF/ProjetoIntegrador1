@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         <p>Total de Empréstimos Ativos: <strong><?= $totalEmprestimos ?></strong></p>
-                        <p>Empréstimos vencidos: <strong>3</strong></p>
+                        <p>Empréstimos vencidos: <strong><?= $emprestimosVencidos ?></strong></p>
                     </div>
                 </div> 
             </div>
@@ -60,7 +60,11 @@
                             <td><?= htmlspecialchars($emprestimos['livro']) ?></td>
                             <td><?= htmlspecialchars($emprestimos['data_devolucao']) ?></td>
                             <td>
-                                <a class="btn btn-secondary btn-sm" href="?pagina=renovar_emprestimo&id=<?= $emprestimos['id'] ?>">Renovar</a>
+                                <a class="btn btn-secondary btn-sm btn-renovar" 
+                                href="?pagina=renovar_emprestimo&id=<?= $emprestimos['id'] ?>" 
+                                data-id="<?= $emprestimos['id'] ?>">
+                                Renovar
+                                </a>
                                 <a class="btn btn-dark btn-sm" href="#">Finalizar</a>
                             </td>
                         </tr>
@@ -78,31 +82,51 @@
     $status = isset($_GET['status']) ? $_GET['status'] : '';
     ?>
 
-    <?php include 'modals/statusModal.php'; ?>
+    <?php 
+        include 'modals/statusModal.php';
+        include 'modals/confirmRenovacao.php'; 
+    ?>
 
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        <?php if ($status == 'success' || $status == 'fail'): ?>
-            var myModal = new bootstrap.Modal(document.getElementById('statusModal'));
-            myModal.show();
-        <?php endif; ?>
-    });
-    </script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    let renovarLink = null;
 
-    <script>
-        document.getElementById("search").addEventListener("keyup", function() {
-            let searchValue = this.value.toLowerCase();
-            let rows = document.querySelectorAll("#loan-list tr");
-
-            rows.forEach(row => {
-                let usuario = row.children[1].textContent.toLowerCase();
-                let livro = row.children[2].textContent.toLowerCase();
-
-                if (usuario.includes(searchValue) || livro.includes(searchValue)) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
-            });
+    // links de renovação
+    document.querySelectorAll(".btn-renovar").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            renovarLink = this.getAttribute("href");
+            let modal = new bootstrap.Modal(document.getElementById("confirmRenovacaoModal"));
+            modal.show();
         });
-    </script>
+    });
+
+    document.getElementById("confirmRenovar").addEventListener("click", function() {
+        if (renovarLink) {
+            window.location.href = renovarLink;
+        }
+    });
+
+    <?php if ($status == 'success' || $status == 'fail'): ?>
+        var myModal = new bootstrap.Modal(document.getElementById('statusModal'));
+        myModal.show();
+    <?php endif; ?>
+
+    // Filtragem da tabela de empréstimos
+    document.getElementById("search").addEventListener("keyup", function() {
+        let searchValue = this.value.toLowerCase();
+        let rows = document.querySelectorAll("#loan-list tr");
+
+        rows.forEach(row => {
+            let usuario = row.children[1].textContent.toLowerCase();
+            let livro = row.children[2].textContent.toLowerCase();
+
+            if (usuario.includes(searchValue) || livro.includes(searchValue)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
+  });
+</script>

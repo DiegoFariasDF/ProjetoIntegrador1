@@ -9,11 +9,17 @@ class EmprestimoController {
     public function listarEmprestimo(){
         $totalEmprestimos = $this->model->contarEmprestimos();
         $emprestimos = $this->model->listarEmprestimo();
+        $emprestimosVencidos = 0;
 
         foreach ($emprestimos as &$emprestimo) {
             $dataEmprestimo = new DateTime($emprestimo['data_emprestimo']);
             $dataEmprestimo->modify('+15 days');
             $emprestimo['data_devolucao'] = $dataEmprestimo->format('d/m/Y');
+            $dataAtual = new DateTime();
+
+            if ($dataEmprestimo < $dataAtual) {
+                $emprestimosVencidos++;
+            }
         }
 
         require 'app/views/emprestimo.php';
