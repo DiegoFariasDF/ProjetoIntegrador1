@@ -28,7 +28,7 @@
                 <a class="nav-link" href="?pagina=leitores">Leitores</a>
             </li>
             <li class="nav-item me-3">
-                <a class="nav-link" href="#fale-conosco">Contato</a>
+                <a class="nav-link" href="?pagina=emprestimo">Emprestimo</a>
             </li>
             
             <?php

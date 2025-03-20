@@ -45,6 +45,20 @@ switch ($pagina) {
         $controller = new LeitorController();
         $controller->adicionarLeitor();
         break;
+    
+    case "emprestimo":
+        require_once "app/controllers/EmprestimoController.php";
+        $controller = new EmprestimoController();
+        $controller->listarEmprestimo();
+        break;
+
+    case "renovar_emprestimo":
+        require_once "app/controllers/EmprestimoController.php";
+        $controller = new EmprestimoController();
+        if (isset($_GET['id'])) {
+            $controller->renovarEmprestimo($_GET['id']);
+        }
+        break;
 
     default:
         include("app/views/login.php");
