@@ -34,5 +34,16 @@ class EmprestimoController {
             header("Location: ?pagina=emprestimo&status=fail");
         }
     }
+
+    public function finalizarEmprestimo($id_emprestimo) {
+        $resultado = $this->model->finalizarEmprestimo($id_emprestimo);
+    
+        if ($resultado) {
+            header("Location: ?pagina=emprestimo&status=success");
+        } else {
+            header("Location: ?pagina=emprestimo&status=fail");
+        }
+    }
+    
     
 }

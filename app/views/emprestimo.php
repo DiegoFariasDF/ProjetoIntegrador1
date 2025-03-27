@@ -63,9 +63,12 @@
                                 <a class="btn btn-secondary btn-sm btn-renovar" 
                                 href="?pagina=renovar_emprestimo&id=<?= $emprestimos['id'] ?>" 
                                 data-id="<?= $emprestimos['id'] ?>">
-                                Renovar
+                                    Renovar
                                 </a>
-                                <a class="btn btn-dark btn-sm" href="#">Finalizar</a>
+                                <a href="?pagina=finalizar_emprestimo&id=<?= $emprestimos['id'] ?>" 
+                                class="btn btn-dark btn-sm btn-finalizar">
+                                    Finalizar Empréstimo
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -85,13 +88,15 @@
     <?php 
         include 'modals/statusModal.php';
         include 'modals/confirmRenovacao.php'; 
+        include 'modals/confirmFinalizacao.php';
     ?>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     let renovarLink = null;
+    let finalizarLink = null;
 
-    // links de renovação
+    // Captura o link de renovação
     document.querySelectorAll(".btn-renovar").forEach(link => {
         link.addEventListener("click", function(event) {
             event.preventDefault();
@@ -104,6 +109,22 @@
     document.getElementById("confirmRenovar").addEventListener("click", function() {
         if (renovarLink) {
             window.location.href = renovarLink;
+        }
+    });
+
+    // Captura o link de finalização
+    document.querySelectorAll(".btn-finalizar").forEach(link => {
+        link.addEventListener("click", function(event) {
+            event.preventDefault();
+            finalizarLink = this.getAttribute("href");
+            let modal = new bootstrap.Modal(document.getElementById("confirmFinalizacaoModal"));
+            modal.show();
+        });
+    });
+
+    document.getElementById("confirmFinalizar").addEventListener("click", function() {
+        if (finalizarLink) {
+            window.location.href = finalizarLink;
         }
     });
 
@@ -128,5 +149,6 @@
             }
         });
     });
-  });
+});
+
 </script>

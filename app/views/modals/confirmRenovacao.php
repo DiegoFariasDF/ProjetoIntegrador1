@@ -10,7 +10,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <a href="#" id="confirmRenovar" class="btn btn-primary">Sim, renovar</a>
+        <a href="#" id="confirmRenovar" class="btn btn-dark">Sim, renovar</a>
       </div>
     </div>
   </div>

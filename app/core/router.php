@@ -60,6 +60,15 @@ switch ($pagina) {
         }
         break;
 
+    case "finalizar_emprestimo":
+        require_once "app/controllers/EmprestimoController.php";
+        $controller = new EmprestimoController();
+        if (isset($_GET['id'])) {
+            $controller->finalizarEmprestimo($_GET['id']);
+        }
+        break;
+        
+
     default:
         include("app/views/login.php");
         break;

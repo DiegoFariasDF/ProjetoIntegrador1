@@ -44,6 +44,22 @@ class EmprestimoModel{
             return false;
         }
     }
+
+    public function finalizarEmprestimo($id_emprestimo) {
+        $sql = "UPDATE emprestimo SET status = 'devolvido' WHERE id = ?";
+    
+        if ($stmt = $this->conexao->prepare($sql)) {
+            $stmt->bind_param("i", $id_emprestimo);
+    
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
 
 ?>
