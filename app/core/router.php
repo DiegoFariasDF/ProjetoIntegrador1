@@ -5,6 +5,10 @@ if (isset($_GET['pagina'])) {
     $pagina = 'home';
 }
 
+/* retorna erros do banco*/
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 switch ($pagina) {
     case "home":
         include("app/views/home.php");
@@ -66,6 +70,12 @@ switch ($pagina) {
         if (isset($_GET['id'])) {
             $controller->finalizarEmprestimo($_GET['id']);
         }
+        break;
+    
+    case "novo_emprestimo":
+        require_once "app/controllers/EmprestimoController.php";  
+        $controller = new EmprestimoController();
+        $controller->novoEmprestimo();  
         break;
         
 

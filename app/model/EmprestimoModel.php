@@ -60,6 +60,14 @@ class EmprestimoModel{
             return false;
         }
     }
+
+    public function novoEmprestimo($leitor_id, $livro){
+        $data = date('Y-m-d');
+        $sql = "INSERT INTO emprestimo SET leitor_id = ?, livro = ?, data_emprestimo = ? ";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("iss", $leitor_id, $livro, $data);
+        return $stmt->execute();
+    }
 }
 
 ?>

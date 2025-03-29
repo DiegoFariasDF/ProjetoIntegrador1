@@ -44,6 +44,22 @@ class EmprestimoController {
             header("Location: ?pagina=emprestimo&status=fail");
         }
     }
+
+    public function novoEmprestimo(){
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $leitor_id = $_POST['leitor_id'];
+            $livro = $_POST['livro'];
+
+            if (!empty($leitor_id) && !empty($livro)) {
+                $this->model->novoEmprestimo($leitor_id, $livro);
+                header("Location: ?pagina=emprestimo");
+                exit();
+            } else {
+                echo "<p><strong>Todos os campos são obrigatórios.</strong></p>";
+            }
+        } 
+        require 'app/views/novo_emprestimo.php';
+    }
     
     
 }
