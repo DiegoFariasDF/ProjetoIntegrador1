@@ -10,7 +10,7 @@ class LeitorModel {
     }
 
     public function listarLeitores() {
-        $sql = "SELECT * FROM leitores";
+        $sql = "SELECT * FROM leitores ORDER BY nome ASC";
         $result = $this->conexao->query($sql);
 
         return $result->fetch_all(MYSQLI_ASSOC);
