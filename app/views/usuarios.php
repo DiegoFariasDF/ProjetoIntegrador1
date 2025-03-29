@@ -15,45 +15,43 @@
         </div>
     </div>
 
-    <a href="?pagina=adicionar_leitor" class="btn btn-success mt-2">
-    <span class="d-inline-flex align-items-center gap-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
-            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-        </svg>    
-        Adicionar Leitor
-    </span>
+    <a href="?pagina=adicionar_leitor" class="btn btn-success mt-3">
+        <span class="d-inline-flex align-items-center gap-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+            </svg>    
+            Adicionar Leitor
+        </span>
     </a>
 
-    <div class="mb-4">
+    <div class="mb-3 mt-3">
         <label for="search" class="form-label">Pesquisar Leitor:</label>
         <input type="text" id="search" class="form-control" placeholder="Digite o nome ou telefone">
     </div>
 
-    <div class="table-responsive">
+    <div class="table-responsive" style="max-height: 400px; overflow-y: auto; border: 1px solid #ddd;">
         <table class="table table-striped">
-            <thead>
+            <thead class="table-dark">
                 <tr>
-                    <th>#</th>
                     <th>Nome</th>
                     <th>Telefone</th>
-                    <th></th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody id="client-list">
                 <?php if (!empty($leitores)): ?>
-                    <?php foreach ($leitores as $leitores): ?>
+                    <?php foreach ($leitores as $leitor): ?>
                         <tr>
-                            <td><?= htmlspecialchars($leitores['id']) ?></td>
-                            <td class="nome"><?= htmlspecialchars($leitores['nome']) ?></td>
-                            <td class="telefone"><?= htmlspecialchars($leitores['telefone']) ?></td>
+                            <td class="nome"><?= htmlspecialchars($leitor['nome']) ?></td>
+                            <td class="telefone"><?= htmlspecialchars($leitor['telefone']) ?></td>
                             <td>
-                                <a class="btn btn-secondary btn-sm" href="?pagina=leitor&id=<?= $leitores['id'] ?>">Visualizar usuário</a>
+                                <a class="btn btn-secondary btn-sm" href="?pagina=leitor&id=<?= $leitor['id'] ?>">Visualizar</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
-                    <tr><td colspan="4">Nenhum usuário encontrado.</td></tr>
+                    <tr><td colspan="4" class="text-center">Nenhum usuário encontrado.</td></tr>
                 <?php endif; ?>
             </tbody>
         </table>
@@ -69,13 +67,7 @@
             let nome = row.querySelector(".nome").textContent.toLowerCase();
             let telefone = row.querySelector(".telefone").textContent.toLowerCase();
 
-            if (nome.includes(searchValue) || telefone.includes(searchValue)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
+            row.style.display = (nome.includes(searchValue) || telefone.includes(searchValue)) ? "" : "none";
         });
     });
 </script>
-
-

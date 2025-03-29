@@ -21,7 +21,7 @@ class EmprestimoModel{
     }
 
     public function contarEmprestimos() {
-        $sql = "SELECT COUNT(*) AS total FROM emprestimo";
+        $sql = "SELECT COUNT(*) AS total FROM emprestimo WHERE status = 'emprestado'";
         $result = $this->conexao->query($sql);
         $data = $result->fetch_assoc();
         return $data['total'];

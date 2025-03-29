@@ -26,7 +26,7 @@
                     <input type="text" class="form-control" id="livro" name="livro" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Registrar Empréstimo</button>
+                <button type="submit" class="btn btn-dark">Registrar Empréstimo</button>
             </form>
         </div>
     </div>
