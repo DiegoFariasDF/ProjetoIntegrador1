@@ -77,7 +77,18 @@ switch ($pagina) {
         $controller = new EmprestimoController();
         $controller->novoEmprestimo();  
         break;
-        
+    
+    case "login":
+        require_once "app/controllers/UsuarioController.php";  
+        $controller = new UsuarioController();
+        $controller->login();  
+        break;
+    
+    case "logout":
+        require_once "app/controllers/UsuarioController.php"; 
+        $controller = new UsuarioController();
+        $controller->logout();  
+        break;
 
     default:
         include("app/views/login.php");

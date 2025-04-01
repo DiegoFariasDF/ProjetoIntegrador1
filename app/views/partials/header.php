@@ -35,17 +35,17 @@
                 session_start(); // Certifique-se de que a sessão foi iniciada
 
                 
-                if (!isset($_SESSION['nome'])) {
+                if (!isset($_SESSION['usuario_nome'])) {
                     
                     echo "<li class=\"nav-item me-3\">
                             <a class=\"nav-link\" href=\"?pagina=login\">Login</a>
                           </li>";
                 } else {
-                    // Se estiver logado, exiba o link para o painel e para sair
-                    $id = md5($_SESSION['id']); // Use o ID do usuário para o link do painel
-                    $tipo_usuario = strtolower($_SESSION['nome']); // Converte para minúsculas para garantir a uniformidade
-                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=painel\" class=\"nav-link\">Painel</a></li>";
-                    echo "<li class=\"nav-item me-3\"><a href=\"model/exit.php\" class=\"nav-link\">Sair</a></li>";
+                    
+                    $id = md5($_SESSION['usuario_id']); 
+                    $tipo_usuario = strtolower($_SESSION['usuario_nome']); 
+                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Painel</a></li>";
+                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=logout\" class=\"nav-link\">Sair</a></li>";
                 }
             ?>
             

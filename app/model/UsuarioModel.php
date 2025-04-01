@@ -18,12 +18,27 @@ class UsuarioModel {
 
     public function getUsuarioPorId($id) {
         $sql = "SELECT * FROM usuarios WHERE id = ?";
-        $stmt = $this->conexao->prepare($sql); // Prepara a query
-        $stmt->bind_param("i", $id); // "i" significa inteiro
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("i", $id); 
         $stmt->execute();
         $result = $stmt->get_result();
         
-        return $result->fetch_assoc(); // Retorna um único usuário como array associativo
+        return $result->fetch_assoc(); 
+    }
+
+    public function autenticarUsuario($user, $senha) {
+        $sql = "SELECT * FROM usuarios WHERE usuario = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("s", $user);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $usuario = $result->fetch_assoc();
+
+        if ($usuario && password_verify($senha, $usuario['senha'])) {
+            return $usuario;
+        } else {
+            return false;
+        }
     }
 }
 ?>
