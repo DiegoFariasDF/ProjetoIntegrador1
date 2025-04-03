@@ -1,3 +1,4 @@
+<?php include 'app/core/auth.php'; ?>
 <div class="container mt-5">
     <h2 class="mb-4">Editar Informações do Leitor</h2>
 

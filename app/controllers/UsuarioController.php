@@ -23,9 +23,16 @@ class UsuarioController {
             if ($usuario) {
                 $_SESSION['usuario_id'] = $usuario['id'];
                 $_SESSION['usuario_nome'] = $usuario['nome'];
+                $_SESSION['usuario_permissao'] = $usuario['permissao'];
 
-                header("Location: ?pagina=novo_emprestimo"); 
-                exit();
+                if ($_SESSION['usuario_permissao'] == 'admin') {
+                    header("Location: ?pagina=home"); 
+                    exit();
+                } elseif ($_SESSION['usuario_permissao'] == 'padrao') {
+                    header("Location: ?pagina=home"); 
+                    exit();
+                }
+
             } else {
                 header("Location: ?pagina=login&erro=1"); 
                 exit();

@@ -1,3 +1,4 @@
+<?php include 'app/core/auth.php'; ?>
 <div class="container mt-5">
     <a href="?pagina=leitores" class="btn btn-dark mb-3">
     <span class="d-inline-flex align-items-center gap-1">

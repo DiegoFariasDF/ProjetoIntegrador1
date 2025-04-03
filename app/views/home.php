@@ -1,3 +1,4 @@
+<?php include 'app/core/auth.php'; ?>
 <div class="container mt-5">
         <div class="row">
 

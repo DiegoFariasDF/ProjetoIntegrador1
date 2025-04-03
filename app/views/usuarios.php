@@ -1,3 +1,4 @@
+<?php include 'app/core/auth.php'; ?>
 <div class="container mt-5">
     <h2 class="mb-4">Lista de Leitores</h2>
 
@@ -9,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <p>Total de Leitores Cadastrados: <strong><?= $totalLeitores ?></strong></p>
-                    <p>Leitores que estão alugando um livro: <strong>3</strong></p>
+                    <p>Total de livros sendo alugados: <strong>1</strong></p>
                 </div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+<?php include 'app/core/auth.php'; ?>
 <div class="container mt-5">
     <h2 class="mb-4">Novo Empréstimo</h2>
     <div class="card">
