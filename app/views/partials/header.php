@@ -13,7 +13,15 @@
 <header class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top sticky-top">
     <div class="container">
     
-        <a class="navbar-brand fs-2 fw-bold" href="?pagina="><img src="public/img/logo.png" alt="Logo" height="50px"></a>
+        <a class="navbar-brand fs-2 fw-bold" href="<?php
+                session_start(); 
+
+                if (!isset($_SESSION['usuario_nome'])) {
+                    echo "?pagina=login";
+                } else {                    
+                    echo "?pagina=home";
+                }
+            ?>"><img src="public/img/logo.png" alt="Logo" height="50px"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarDark" aria-controls="navbarDark" aria-expanded="false" aria-label="Toggle navigation">
         
         <img src="public/img/hamburger.png" alt="">
@@ -21,20 +29,8 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarDark">
             <ul class="navbar-nav ms-auto mb-2 mb-xl-0 fs-5 ms-auto p-2 text-center">
-            <li class="nav-item me-3">
-                <a class="nav-link " aria-current="page" href="?pagina=home">Home</a>
-            </li>
-            <li class="nav-item me-3">
-                <a class="nav-link" href="?pagina=leitores">Leitores</a>
-            </li>
-            <li class="nav-item me-3">
-                <a class="nav-link" href="?pagina=emprestimo">Emprestimo</a>
-            </li>
             
             <?php
-                session_start(); // Certifique-se de que a sessão foi iniciada
-
-                
                 if (!isset($_SESSION['usuario_nome'])) {
                     
                     echo "<li class=\"nav-item me-3\">
@@ -44,6 +40,9 @@
                     
                     $id = md5($_SESSION['usuario_id']); 
                     $tipo_usuario = strtolower($_SESSION['usuario_nome']); 
+                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Home</a></li>";
+                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=leitores\" class=\"nav-link\">Leitores</a></li>";
+                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=emprestimo\" class=\"nav-link\">Emprestimo</a></li>";
                     echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Painel</a></li>";
                     echo "<li class=\"nav-item me-3\"><a href=\"?pagina=logout\" class=\"nav-link\">Sair</a></li>";
                 }

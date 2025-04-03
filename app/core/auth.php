@@ -18,8 +18,8 @@ $tipo_usuario = $_SESSION['usuario_permissao'] ?? '';
 $pagina_atual = $_GET['pagina'] ?? '';
 
 $permissoes = [
-    'admin' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo'],
-    'padrao' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo']
+    'admin' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo', 'painel'],
+    'padrao' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo', 'painel']
 ];
 
 // Verifica permissao
