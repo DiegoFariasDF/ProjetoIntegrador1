@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <p>Total de Leitores Cadastrados: <strong><?= $totalLeitores ?></strong></p>
-                    <p>Total de livros sendo alugados: <strong>1</strong></p>
+                    <p>Total de livros sendo alugados: <strong> <?= $totalEmprestimos ?></strong></p>
                 </div>
             </div>
         </div>

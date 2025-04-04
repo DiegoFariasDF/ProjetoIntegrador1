@@ -1,5 +1,6 @@
 <?php
 require_once 'app/model/LeitorModel.php';
+require_once 'app/model/EmprestimoModel.php';
 
 class LeitorController {
     private $model;
@@ -11,7 +12,12 @@ class LeitorController {
     public function listarLeitores() {
         $leitores = $this->model->listarLeitores(); // Obtém a lista de leitores
         $totalLeitores = $this->model->contarLeitores(); // Conta o total de leitores
-        require 'app/views/usuarios.php'; // Passa os dados para a view
+    
+        // model emprestimo
+        $emprestimoModel = new EmprestimoModel();
+        $totalEmprestimos = $emprestimoModel->contarEmprestimos(); 
+    
+        require 'app/views/usuarios.php';
     }
 
     public function mostrarLeitor() {
@@ -80,5 +86,6 @@ class LeitorController {
         }
     }
     
+
 }
 ?>

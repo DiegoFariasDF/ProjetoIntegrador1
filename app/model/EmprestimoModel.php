@@ -11,7 +11,7 @@ class EmprestimoModel{
 
     public function listarEmprestimo(){
         $sql = "
-        SELECT e.*, l.nome AS nome
+        SELECT e.*, l.nome AS nome, l.telefone AS telefone
         FROM emprestimo e
         INNER JOIN leitores l ON e.leitor_id = l.id
         WHERE e.status = 'emprestado'  -- Filtra apenas os empréstimos com status 'emprestado'
