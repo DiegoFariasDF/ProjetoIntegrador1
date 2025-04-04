@@ -24,6 +24,7 @@ class UsuarioController {
                 $_SESSION['usuario_id'] = $usuario['id'];
                 $_SESSION['usuario_nome'] = $usuario['nome'];
                 $_SESSION['usuario_permissao'] = $usuario['permissao'];
+                $_SESSION['ultimo_acesso'] = time(); 
 
                 if ($_SESSION['usuario_permissao'] == 'admin') {
                     header("Location: ?pagina=home"); 

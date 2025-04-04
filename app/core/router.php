@@ -2,7 +2,7 @@
 if (isset($_GET['pagina'])) {
     $pagina = $_GET["pagina"];
 } else {
-    $pagina = 'home';
+    $pagina = 'login';
 }
 
 /* retorna erros do banco*/
@@ -88,6 +88,10 @@ switch ($pagina) {
         require_once "app/controllers/UsuarioController.php"; 
         $controller = new UsuarioController();
         $controller->logout();  
+        break;
+    
+    case "painel":
+        include("app/views/painel.php");
         break;
 
     default:

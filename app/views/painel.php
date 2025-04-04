@@ -1,4 +1,6 @@
+
 <?php 
+include 'app/core/auth.php';
 // demonstração
 $usuarios = [
     ["id" => 1, "nome" => "Diego Farias", "usuario" => "dfarias", "permissao" => "Administrador"],

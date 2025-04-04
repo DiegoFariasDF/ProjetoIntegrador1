@@ -1,6 +1,9 @@
 <?php
+
+$tempo_limite = 14400; 
+
 if (!isset($_SESSION['usuario_id'])) {
-    // Sem login
+    session_destroy();
     die('
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f8f9fa;">
     <div class="text-center">
@@ -14,6 +17,19 @@ if (!isset($_SESSION['usuario_id'])) {
 </div>');
 }
 
+if (isset($_SESSION['ultimo_acesso'])) {
+    $tempo_decorrido = time() - $_SESSION['ultimo_acesso'];
+
+    if ($tempo_decorrido > $tempo_limite) {
+        session_unset();
+        session_destroy();
+        header("Location: ?pagina=login");
+        exit();
+    }
+}
+
+$_SESSION['ultimo_acesso'] = time();
+
 $tipo_usuario = $_SESSION['usuario_permissao'] ?? ''; 
 $pagina_atual = $_GET['pagina'] ?? '';
 
@@ -22,7 +38,7 @@ $permissoes = [
     'padrao' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo', 'painel']
 ];
 
-// Verifica permissao
+
 if (!isset($permissoes[$tipo_usuario]) || !in_array($pagina_atual, $permissoes[$tipo_usuario])) {
     die('
 <div class="d-flex justify-content-center align-items-center" style="height: 100vh; background-color: #f8f9fa;">
