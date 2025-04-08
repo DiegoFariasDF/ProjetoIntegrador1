@@ -7,9 +7,13 @@ class EmprestimoController {
         $this->model = new EmprestimoModel();
     }
     public function listarEmprestimo(){
+        $this->model->verificarEAtribuirAtrasos();
+
         $totalEmprestimos = $this->model->contarEmprestimos();
+        $totalAtrasos = $this->model->contarAtrasos();
         $emprestimos = $this->model->listarEmprestimo();
         $emprestimosVencidos = 0;
+
 
         foreach ($emprestimos as &$emprestimo) {
             $dataEmprestimo = new DateTime($emprestimo['data_emprestimo']);

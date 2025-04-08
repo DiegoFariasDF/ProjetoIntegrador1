@@ -22,9 +22,11 @@ class Database {
         $this->conexao->select_db($this->dataBase);
         
         $this->criarTabelas();
+        $this->atualizarEstrutura();
+        $this->inserirUsuarioAdmin();
     }
 
-    public function criarTabelas() {
+    private function criarTabelas() {
         $tabelas = [
             "CREATE TABLE IF NOT EXISTS leitores (
                 id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,6 +39,7 @@ class Database {
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 nome VARCHAR(50) NOT NULL,
                 usuario VARCHAR(50) NOT NULL UNIQUE,
+                permissao VARCHAR(30) NOT NULL,
                 senha VARCHAR(255) NOT NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
 
@@ -47,6 +50,7 @@ class Database {
                 livro VARCHAR(60) NOT NULL,
                 qtd_renovacao INT NOT NULL DEFAULT 0,
                 status ENUM('emprestado', 'devolvido') NOT NULL DEFAULT 'emprestado',
+                atraso TINYINT(1) DEFAULT 0,
                 FOREIGN KEY (leitor_id) REFERENCES leitores(id) ON DELETE CASCADE ON UPDATE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci",
 
@@ -58,13 +62,33 @@ class Database {
                 FOREIGN KEY (funcionario_id) REFERENCES usuarios(id) ON DELETE CASCADE ON UPDATE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci"
         ];
-    
+
         foreach ($tabelas as $sql) {
-            if ($this->conexao->query($sql) === TRUE) {
-                echo "";
-            } else {
+            if (!$this->conexao->query($sql)) {
                 die("Erro ao criar tabela: " . $this->conexao->error);
             }
+        }
+    }
+
+    private function atualizarEstrutura() {
+        $resultado = $this->conexao->query("SHOW COLUMNS FROM emprestimo LIKE 'atraso'");
+        if ($resultado->num_rows == 0) {
+            $this->conexao->query("ALTER TABLE emprestimo ADD COLUMN atraso TINYINT(1) DEFAULT 0");
+        }
+
+        $resultado = $this->conexao->query("SHOW COLUMNS FROM usuarios LIKE 'permissao'");
+        if ($resultado->num_rows == 0) {
+            $this->conexao->query("ALTER TABLE usuarios ADD COLUMN permissao VARCHAR(30) NOT NULL DEFAULT 'padrao'");
+        }
+    }
+
+    private function inserirUsuarioAdmin() {
+        $usuario = 'admin';
+        $resultado = $this->conexao->query("SELECT id FROM usuarios WHERE usuario = '$usuario'");
+
+        if ($resultado->num_rows == 0) {
+            $senhaCriptografada = '$2y$10$H4GFGilPmJs5IS0Y2CjaLerY0Vq1THalwhEsShwlLf5qOOKPkPbZ.';
+            $this->conexao->query("INSERT INTO usuarios (nome, usuario, permissao, senha) VALUES ('Administrador', 'admin', 'admin', '$senhaCriptografada')");
         }
     }
 

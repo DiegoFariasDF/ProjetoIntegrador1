@@ -27,6 +27,34 @@ class EmprestimoModel{
         return $data['total'];
     }
 
+    public function contarAtrasos(){
+        $sql = "SELECT COUNT(*) AS total FROM emprestimo WHERE atraso = 1";
+        $result = $this->conexao->query($sql);
+        $data = $result->fetch_assoc();
+        return $data['total'];
+    }
+
+    public function verificarEAtribuirAtrasos() {
+        $sql = "SELECT id, data_emprestimo FROM emprestimo WHERE status = 'emprestado'";
+        $result = $this->conexao->query($sql);
+    
+        if ($result) {
+            while ($row = $result->fetch_assoc()) {
+                $dataEmprestimo = new DateTime($row['data_emprestimo']);
+                $dataEmprestimo->modify('+15 days');
+                $dataAtual = new DateTime();
+    
+                $atrasado = ($dataEmprestimo < $dataAtual) ? 1 : 0;
+    
+                $update = "UPDATE emprestimo SET atraso = ? WHERE id = ?";
+                $stmt = $this->conexao->prepare($update);
+                $stmt->bind_param("ii", $atrasado, $row['id']);
+                $stmt->execute();
+            }
+        }
+    }
+    
+
     public function renovarEmprestimo($id_emprestimo) {
         $data_renovacao = date('Y-m-d');
         $sql = "UPDATE emprestimo SET data_emprestimo = ?, qtd_renovacao = qtd_renovacao + 1 WHERE id = ?";

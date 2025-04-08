@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <p>Total de Empréstimos Ativos: <strong><?= $totalEmprestimos ?></strong></p>
-                    <p>Empréstimos vencidos: <strong><?= $emprestimosVencidos ?></strong></p>
+                    <p>Empréstimos vencidos: <strong><?= $totalAtrasos ?></strong></p>
                 </div>
             </div> 
         </div>
