@@ -40,5 +40,12 @@ class UsuarioModel {
             return false;
         }
     }
+
+    public function adicionarUsuario($nome, $permissao, $usuario, $senha) {
+        $sql = "INSERT INTO usuarios SET nome = ?, usuario = ?, permissao = ?, senha = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("ssss", $nome, $usuario, $permissao, $senha);
+        return $stmt->execute();
+    }
 }
 ?>

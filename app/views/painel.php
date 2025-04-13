@@ -1,12 +1,6 @@
 
 <?php 
 include 'app/core/auth.php';
-// demonstração
-$usuarios = [
-    ["id" => 1, "nome" => "Diego Farias", "usuario" => "dfarias", "permissao" => "Administrador"],
-    ["id" => 2, "nome" => "Ana Souza", "usuario" => "asouza", "permissao" => "Editor"],
-    ["id" => 3, "nome" => "Carlos Lima", "usuario" => "clima", "permissao" => "Usuário"],
-];
 ?>
 <div class="container mt-5">
     <h2 class="mb-4">Gerenciamento de Usuários</h2>

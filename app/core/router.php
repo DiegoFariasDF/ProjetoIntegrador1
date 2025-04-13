@@ -49,6 +49,18 @@ switch ($pagina) {
         $controller = new LeitorController();
         $controller->adicionarLeitor();
         break;
+
+    case "adicionar_usuario":
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        $controller->exibirFormulario(); 
+        break;
+
+    case "salvar_usuario": 
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        $controller->adicionarUsuario();
+        break;
     
     case "emprestimo":
         require_once "app/controllers/EmprestimoController.php";
@@ -91,8 +103,10 @@ switch ($pagina) {
         break;
     
     case "painel":
-        include("app/views/painel.php");
-        break;
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        $controller->listarUsuarios();
+        break;        
 
     default:
         include("app/views/login.php");

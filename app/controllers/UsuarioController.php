@@ -10,7 +10,7 @@ class UsuarioController {
 
     public function listarUsuarios() {
         $usuarios = $this->model->listarUsuarios();
-        require 'app/views/usuarios.php'; 
+        require 'app/views/painel.php'; 
     }
 
     public function login() {
@@ -40,6 +40,32 @@ class UsuarioController {
             }
         }
         require 'app/views/login.php';
+    }
+
+    public function exibirFormulario() {
+        require_once "app/views/adicionar_usuario.php"; 
+    }
+
+    public function adicionarUsuario() {
+        if ($_SERVER["REQUEST_METHOD"] === "POST") {
+            $nome = $_POST['nome'];
+            $permissao = $_POST['permissao'];
+            //criando o nome de usuario
+            $partesNome = explode(" ", trim($nome));
+            $primeiro = $partesNome[0];
+            $ultimo = end($partesNome);
+            $usuario = strtolower($primeiro . "." . $ultimo);
+            // Senha padrao 1 ao 7
+            $senha = '$2y$10$zJkEssRWCH9DTeSh.3sXl.Yd11P658Bf0pZ7ZPDyDw/8JRw.LaDoa';
+    
+            if (!empty($nome) && !empty($permissao)) {
+                $this->model->adicionarUsuario($nome, $permissao, $usuario, $senha);
+                header("Location: ?pagina=painel");
+                exit();
+            } else {
+                echo "<p><strong>Todos os campos são obrigatórios.</strong></p>";
+            }
+        }
     }
 
     public function logout() {
