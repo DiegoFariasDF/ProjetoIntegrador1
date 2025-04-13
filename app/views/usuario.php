@@ -33,9 +33,9 @@
             <h5>Relatório do Leitor</h5>
         </div>
         <div class="card-body">
-            <p><strong>Livros Emprestados:</strong> 3</p>
-            <p><strong>Quantidade de Aluguéis já realizados:</strong> 8</p>
-            <p><strong>Quantidade de Atrasos:</strong> 2</p>
+            <p><strong>Livros Emprestados:</strong> <?= htmlspecialchars($leitor['emprestimos_ativos']) ?></p>
+            <p><strong>Quantidade de Aluguéis já realizados:</strong> <?= htmlspecialchars($leitor['total_emprestimos']) ?> </p>
+            <p><strong>Quantidade de Atrasos:</strong> <?= htmlspecialchars($leitor['emprestimos_atrasados']) ?> </p>
         </div>
     </div>
 </div>

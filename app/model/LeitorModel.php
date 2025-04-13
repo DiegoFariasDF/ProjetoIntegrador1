@@ -17,14 +17,38 @@ class LeitorModel {
     }
 
     public function getLeitorPorId($id) {
-        $sql = "SELECT * FROM leitores WHERE id = ?";
-        $stmt = $this->conexao->prepare($sql); // Prepara a query
-        $stmt->bind_param("i", $id); // "i" significa inteiro
+        $sql = "
+            SELECT 
+                l.*, 
+                COUNT(e.id) AS total_emprestimos,
+                SUM(CASE 
+                    WHEN e.status = 'emprestado' THEN 1 
+                    ELSE 0 
+                END) AS emprestimos_ativos,
+                SUM(CASE 
+                    WHEN e.atraso = 1 THEN 1 
+                    ELSE 0 
+                END) AS emprestimos_atrasados
+            FROM 
+                leitores l
+            LEFT JOIN 
+                emprestimo e ON l.id = e.leitor_id
+            WHERE 
+                l.id = ?
+            GROUP BY 
+                l.id
+        ";
+    
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("i", $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        
-        return $result->fetch_assoc(); 
+    
+        return $result->fetch_assoc();
     }
+    
+    
+    
 
     public function contarLeitores() {
         $sql = "SELECT COUNT(*) AS total FROM leitores";
