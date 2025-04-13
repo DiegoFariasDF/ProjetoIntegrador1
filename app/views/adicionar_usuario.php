@@ -20,7 +20,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-success">Salvar</button>
-                <a href="?pagina=leitores" class="btn btn-secondary">Cancelar</a>
+                <a href="?pagina=painel" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </div>
