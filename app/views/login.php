@@ -1,4 +1,4 @@
-<div class="text-center d-flex align-items-center justify-content-center vh-100">
+<div class="text-center d-flex align-items-center justify-content-center p-3">
     <main class="form-signin w-100 m-auto" style="max-width: 380px;">
         <form action="" method="POST"> 
             <img class="mb-4" src="public/img/logoDark.png" alt="Logo" height="100">

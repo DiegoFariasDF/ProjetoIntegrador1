@@ -36,8 +36,26 @@ include 'app/core/auth.php';
                             <td class="usuario"> <?= htmlspecialchars($usuario['usuario']) ?> </td>
                             <td class="permissao"> <?= htmlspecialchars($usuario['permissao']) ?> </td>
                             <td>
-                                <a class="btn btn-secondary btn-sm" href="?pagina=editar_usuario&id=<?= $usuario['id'] ?>">Editar</a>
-                                <a class="btn btn-danger btn-sm" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
+                                <!-- mobile -->
+                                <div class="dropdown dropstart d-md-none">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        <i class="bi bi-gear"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" href="?pagina=editar_usuario&id=<?= $usuario['id'] ?>">Editar</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <!-- desktop -->
+                                <div class="d-none d-md-flex gap-2">
+                                    <a class="btn btn-secondary btn-sm" href="?pagina=editar_usuario&id=<?= $usuario['id'] ?>">Editar</a>
+                                    <a class="btn btn-danger btn-sm" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
+                                </div>
                             </td>
                         </tr>
                     <?php endforeach; ?>
