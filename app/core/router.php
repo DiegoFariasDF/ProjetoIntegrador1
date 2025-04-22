@@ -11,7 +11,10 @@ error_reporting(E_ALL);
 
 switch ($pagina) {
     case "home":
-        include("app/views/home.php");
+        require_once "app/controllers/EmprestimoController.php";
+        $controller = new EmprestimoController();
+        $dados = $controller->listarEmprestimoGrafico(); 
+        include("app/views/home.php"); 
         break;
 
     case "leitores":

@@ -27,6 +27,13 @@ class EmprestimoModel{
         return $data['total'];
     }
 
+    public function contarEmprestimosRegular(){
+        $sql = "SELECT COUNT(*) AS total FROM emprestimo WHERE atraso = 0 AND status = 'emprestado'";
+        $result = $this->conexao->query($sql);
+        $data = $result->fetch_assoc();
+        return $data['total'];
+    }
+
     public function contarAtrasos(){
         $sql = "SELECT COUNT(*) AS total FROM emprestimo WHERE atraso = 1";
         $result = $this->conexao->query($sql);
