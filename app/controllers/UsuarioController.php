@@ -68,6 +68,37 @@ class UsuarioController {
         }
     }
 
+    public function editarUsuario() {
+        if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+            $idUsuario = $_GET['id'];
+            $usuario = $this->model->getUsuarioPorId($idUsuario);
+    
+            if (!$usuario) {
+                echo "<p><strong>Usuário não encontrado.</strong></p>";
+                return;
+            }
+    
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $nome = $_POST['nome'];
+                $user = $_POST['usuario'];
+                $permissao = $_POST['permissao'];
+    
+                $atualizado = $this->model->editarUsuario($idUsuario, $nome, $user, $permissao);
+    
+                if ($atualizado) {
+                    header("Location: ?pagina=painel");
+                    exit;
+                } else {
+                    echo "<p><strong>Erro ao atualizar o usuário.</strong></p>";
+                }
+            } else {
+                require 'app/views/editar_usuario.php';
+            }
+        } else {
+            echo "<p><strong>ID inválido.</strong></p>";
+        }
+    }
+
     public function logout() {
         session_destroy();
         header("Location: ?pagina=login");

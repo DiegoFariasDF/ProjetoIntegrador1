@@ -47,5 +47,12 @@ class UsuarioModel {
         $stmt->bind_param("ssss", $nome, $usuario, $permissao, $senha);
         return $stmt->execute();
     }
+
+    public function editarUsuario($id, $nome, $usuario, $permissao) {
+        $sql = "UPDATE usuarios SET nome = ?, usuario = ?, permissao = ? WHERE id = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("sssi", $nome, $usuario, $permissao, $id);
+        return $stmt->execute();
+    }
 }
 ?>

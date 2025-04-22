@@ -111,6 +111,13 @@ switch ($pagina) {
         $controller->listarUsuarios();
         break;        
 
+    case "editar_usuario":
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        $controller->editarUsuario();
+        break;
+
+
     default:
         include("app/views/login.php");
         break;

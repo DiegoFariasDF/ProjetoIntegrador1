@@ -3,16 +3,27 @@
     <h2 class="mb-4">Editar Informações do Usuario</h2>
 
     <?php if (isset($usuario)): ?>
-        <form action="?pagina=atualizar_leitor" method="POST">
+        <form action="" method="POST">
             <input type="hidden" name="id" value="<?= htmlspecialchars($usuario['id']) ?>">
 
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" required>
             </div>
+			<div class="mb-3">
+                <label for="usuario" class="form-label">Usuario</label>
+                <input type="text" class="form-control" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario['usuario']) ?>" required>
+            </div>
+			<div class="mb-3">
+				<label for="permissao" class="form-label">Permissão</label>
+				<select class="form-select" id="permissao" name="permissao" required>
+                    <option value="admin" <?= $usuario['permissao'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+                    <option value="padrao" <?= $usuario['permissao'] === 'padrao' ? 'selected' : '' ?>>Padrão</option>
+                </select>
+            </div>
 
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-            <a href="?pagina=leitor&id=<?= $usuario['id'] ?>" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-dark">Salvar Alterações</button>
+            <a href="?pagina=painel" class="btn btn-secondary">Cancelar</a>
         </form>
     <?php else: ?>
         <p><strong>Usuario não encontrado.</strong></p>

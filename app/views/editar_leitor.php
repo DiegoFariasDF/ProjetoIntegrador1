@@ -16,7 +16,7 @@
                 <input type="text" class="form-control" id="telefone" name="telefone" value="<?= htmlspecialchars($leitor['telefone']) ?>" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+            <button type="submit" class="btn btn-dark">Salvar Alterações</button>
             <a href="?pagina=leitor&id=<?= $leitor['id'] ?>" class="btn btn-secondary">Cancelar</a>
         </form>
     <?php else: ?>
