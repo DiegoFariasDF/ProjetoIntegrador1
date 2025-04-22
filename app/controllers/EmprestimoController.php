@@ -31,8 +31,6 @@ class EmprestimoController {
     }
 
     public function listarEmprestimoGrafico() {
-        $this->model->verificarEAtribuirAtrasos();
-    
         $totalEmprestimos = $this->model->contarEmprestimos();
         $totalEmprestimosRegular = $this->model->contarEmprestimosRegular();
         $totalAtrasos = $this->model->contarAtrasos();

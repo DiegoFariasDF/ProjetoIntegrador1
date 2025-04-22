@@ -35,7 +35,7 @@ class EmprestimoModel{
     }
 
     public function contarAtrasos(){
-        $sql = "SELECT COUNT(*) AS total FROM emprestimo WHERE atraso = 1";
+        $sql = "SELECT COUNT(*) AS total FROM emprestimo WHERE atraso = 1 AND status = 'emprestado'";
         $result = $this->conexao->query($sql);
         $data = $result->fetch_assoc();
         return $data['total'];
@@ -66,7 +66,6 @@ class EmprestimoModel{
         $data_renovacao = date('Y-m-d');
         $sql = "UPDATE emprestimo SET data_emprestimo = ?, qtd_renovacao = qtd_renovacao + 1 WHERE id = ?";
 
-        // Preparando e executando a query
         if ($stmt = $this->conexao->prepare($sql)) {
             $stmt->bind_param("si", $data_renovacao, $id_emprestimo);
 
