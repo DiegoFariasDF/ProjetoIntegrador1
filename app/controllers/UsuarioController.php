@@ -99,6 +99,16 @@ class UsuarioController {
         }
     }
 
+    public function excluirUsuario($id) {
+        $resultado = $this->model->excluirUsuario($id);
+    
+        if ($resultado) {
+            header("Location: ?pagina=painel&status=success");
+        } else {
+            header("Location: ?pagina=painel&status=fail");
+        }
+    }
+
     public function logout() {
         session_destroy();
         header("Location: ?pagina=login");

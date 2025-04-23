@@ -117,6 +117,14 @@ switch ($pagina) {
         $controller->editarUsuario();
         break;
 
+    case "excluir_usuario":
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        if (isset($_GET['id'])) {
+            $controller->excluirUsuario($_GET['id']);
+        }
+        break;
+
 
     default:
         include("app/views/login.php");

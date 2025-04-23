@@ -54,5 +54,21 @@ class UsuarioModel {
         $stmt->bind_param("sssi", $nome, $usuario, $permissao, $id);
         return $stmt->execute();
     }
+
+    public function excluirUsuario($id) {
+        $sql = "DELETE from usuarios WHERE id = ?";
+    
+        if ($stmt = $this->conexao->prepare($sql)) {
+            $stmt->bind_param("i", $id);
+    
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
 }
 ?>
