@@ -114,5 +114,16 @@ class UsuarioController {
         header("Location: ?pagina=login");
         exit();
     }
+
+    public function resetarSenha($id) {
+        $resultado = $this->model->resetarSenha($id);
+    
+        if ($resultado) {
+            header("Location: ?pagina=painel&status=success");
+        } else {
+            header("Location: ?pagina=painel&status=fail");
+        }
+    }
+
 }
 ?>

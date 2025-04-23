@@ -55,6 +55,7 @@ include 'app/core/auth.php';
                                 <div class="d-none d-md-flex gap-2">
                                     <a class="btn btn-secondary btn-sm" href="?pagina=editar_usuario&id=<?= $usuario['id'] ?>">Editar</a>
                                     <a class="btn btn-danger btn-sm btn-excluir-usuario" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
+                                    <a class="btn btn-dark btn-sm" href="?pagina=resetar_senha&id=<?= $usuario['id'] ?>">Resetar</a>
                                 </div>
                             </td>
                         </tr>

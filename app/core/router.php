@@ -125,6 +125,14 @@ switch ($pagina) {
         }
         break;
 
+    case "resetar_senha":
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        if (isset($_GET['id'])) {
+            $controller->resetarSenha($_GET['id']);
+        }
+        break;
+
 
     default:
         include("app/views/login.php");

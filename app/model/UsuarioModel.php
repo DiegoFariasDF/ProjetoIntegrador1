@@ -70,5 +70,14 @@ class UsuarioModel {
             return false;
         }
     }
+
+    public function resetarSenha($id) {
+        $senha = '1234567';
+        $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+        $sql = "UPDATE usuarios SET senha = ? WHERE id = ?";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("si", $senhaHash, $id);
+        return $stmt->execute();
+    }
 }
 ?>
