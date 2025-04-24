@@ -46,7 +46,10 @@ include 'app/core/auth.php';
                                             <a class="dropdown-item" href="?pagina=editar_usuario&id=<?= $usuario['id'] ?>">Editar</a>
                                         </li>
                                         <li>
-                                            <a class="dropdown-item" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
+                                            <a class="dropdown-item btn-del-user" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item btn-reset-pass" href="?pagina=resetar_senha&id=<?= $usuario['id'] ?>">Resetar</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -54,8 +57,8 @@ include 'app/core/auth.php';
                                 <!-- desktop -->
                                 <div class="d-none d-md-flex gap-2">
                                     <a class="btn btn-secondary btn-sm" href="?pagina=editar_usuario&id=<?= $usuario['id'] ?>">Editar</a>
-                                    <a class="btn btn-danger btn-sm btn-excluir-usuario" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
-                                    <a class="btn btn-dark btn-sm" href="?pagina=resetar_senha&id=<?= $usuario['id'] ?>">Resetar</a>
+                                    <a class="btn btn-danger btn-sm btn-del-user" href="?pagina=excluir_usuario&id=<?= $usuario['id'] ?>">Excluir</a>
+                                    <a class="btn btn-dark btn-sm btn-reset-pass" href="?pagina=resetar_senha&id=<?= $usuario['id'] ?>">Resetar</a>
                                 </div>
                             </td>
                         </tr>
@@ -68,17 +71,69 @@ include 'app/core/auth.php';
     </div>
 </div>
 
+<?php
+$status = isset($_GET['status']) ? $_GET['status'] : '';
+?>
+
+<?php 
+    include 'modals/statusModal.php';
+    include 'modals/confirmExclusaoUsuario.php';
+    include 'modals/confirmResetPass.php';
+?>
+
 <script>
-    document.getElementById("search").addEventListener("keyup", function() {
-        let searchValue = this.value.toLowerCase();
-        let rows = document.querySelectorAll("#user-list tr");
+    document.addEventListener("DOMContentLoaded", function() {
+    let renovarLink = null;
+    let finalizarLink = null;
 
-        rows.forEach(row => {
-            let nome = row.querySelector(".nome").textContent.toLowerCase();
-            let usuario = row.querySelector(".usuario").textContent.toLowerCase();
-            let permissao = row.querySelector(".permissao").textContent.toLowerCase();
+        // Captura o link de exclusao
+        document.querySelectorAll(".btn-del-user").forEach(link => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                finalizarLink = this.getAttribute("href");
+                let modal = new bootstrap.Modal(document.getElementById("confirmExclusaoModal"));
+                modal.show();
+            });
+        });
 
-            row.style.display = (nome.includes(searchValue) || usuario.includes(searchValue) || permissao.includes(searchValue)) ? "" : "none";
+        document.getElementById("confirmExclusaoBtn").addEventListener("click", function() {
+            if (finalizarLink) {
+                window.location.href = finalizarLink;
+            }
+        });
+
+        // Captura o link de reset
+        document.querySelectorAll(".btn-reset-pass").forEach(link => {
+            link.addEventListener("click", function(event) {
+                event.preventDefault();
+                finalizarLink = this.getAttribute("href");
+                let modal = new bootstrap.Modal(document.getElementById("confirmResetModal"));
+                modal.show();
+            });
+        });
+
+        document.getElementById("confirmResetBtn").addEventListener("click", function() {
+            if (finalizarLink) {
+                window.location.href = finalizarLink;
+            }
+        });
+
+        <?php if ($status == 'success' || $status == 'fail'): ?>
+            var myModal = new bootstrap.Modal(document.getElementById('statusModal'));
+            myModal.show();
+        <?php endif; ?>    
+
+        document.getElementById("search").addEventListener("keyup", function() {
+            let searchValue = this.value.toLowerCase();
+            let rows = document.querySelectorAll("#user-list tr");
+
+            rows.forEach(row => {
+                let nome = row.querySelector(".nome").textContent.toLowerCase();
+                let usuario = row.querySelector(".usuario").textContent.toLowerCase();
+                let permissao = row.querySelector(".permissao").textContent.toLowerCase();
+
+                row.style.display = (nome.includes(searchValue) || usuario.includes(searchValue) || permissao.includes(searchValue)) ? "" : "none";
+            });
         });
     });
 </script>
