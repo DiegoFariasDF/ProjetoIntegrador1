@@ -20,6 +20,18 @@ class EmprestimoModel{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
+    public function contarEmprestimosTotalAnual() {
+        $anoAtual = date('Y');
+        $sql = "SELECT COUNT(*) AS total 
+                FROM emprestimo 
+                WHERE data_emprestimo >= '{$anoAtual}-01-01' 
+                  AND data_emprestimo <= '{$anoAtual}-12-31'";
+    
+        $result = $this->conexao->query($sql);
+        $data = $result->fetch_assoc();
+        return $data['total'];
+    }
+
     public function contarEmprestimos() {
         $sql = "SELECT COUNT(*) AS total FROM emprestimo WHERE status = 'emprestado'";
         $result = $this->conexao->query($sql);
@@ -40,6 +52,43 @@ class EmprestimoModel{
         $data = $result->fetch_assoc();
         return $data['total'];
     }
+
+    public function buscarUltimosEmprestimos($limite = 5) {
+        $sql = "
+            SELECT l.nome, e.livro, e.data_emprestimo 
+            FROM emprestimo e
+            INNER JOIN leitores l ON e.leitor_id = l.id
+            ORDER BY e.data_emprestimo DESC 
+            LIMIT ?
+        ";
+    
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("i", $limite);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function buscarLeitoresComMaisAtrasos($limite = 5) {
+    $sql = "
+        SELECT l.nome, COUNT(*) AS total_atrasos
+        FROM emprestimo e
+        INNER JOIN leitores l ON e.leitor_id = l.id
+        WHERE e.status = 'emprestado' AND DATE_ADD(e.data_emprestimo, INTERVAL 15 DAY) < CURDATE()
+        GROUP BY e.leitor_id
+        ORDER BY total_atrasos DESC
+        LIMIT ?
+    ";
+
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->bind_param("i", $limite);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
 
     public function verificarEAtribuirAtrasos() {
         $sql = "SELECT id, data_emprestimo FROM emprestimo WHERE status = 'emprestado'";

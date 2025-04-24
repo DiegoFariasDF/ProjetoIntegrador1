@@ -31,10 +31,12 @@ class EmprestimoController {
     }
 
     public function listarEmprestimoGrafico() {
-        $totalEmprestimos = $this->model->contarEmprestimos();
+        $totalEmprestimosAnual = $this->model->contarEmprestimosTotalAnual();
+        $totalEmprestimosAtivos = $this->model->contarEmprestimos();
         $totalEmprestimosRegular = $this->model->contarEmprestimosRegular();
         $totalAtrasos = $this->model->contarAtrasos();
         $emprestimos = $this->model->listarEmprestimo();
+        $ultimosEmprestimos = $this->model->buscarUltimosEmprestimos();
     
         $emprestimosVencidos = 0;
     
@@ -50,13 +52,16 @@ class EmprestimoController {
         }
     
         return [
-            'totalEmprestimos' => $totalEmprestimos,
+            'totalEmprestimosAnual' => $totalEmprestimosAnual,
+            'totalEmprestimosAtivos' => $totalEmprestimosAtivos,
             'totalEmprestimosRegular' => $totalEmprestimosRegular,
             'totalAtrasos' => $totalAtrasos,
             'emprestimosVencidos' => $emprestimosVencidos,
-            'emprestimos' => $emprestimos
+            'emprestimos' => $emprestimos,
+            'ultimosEmprestimos' => $ultimosEmprestimos
         ];
-    }    
+    }
+    
 
     public function renovarEmprestimo($id_emprestimo) {
         $resultado = $this->model->renovarEmprestimo($id_emprestimo);
