@@ -98,6 +98,10 @@ class EmprestimoController {
         } 
         require 'app/views/novo_emprestimo.php';
     }
+
+    public function listarLeitoresComMaisAtrasos($limite = 5) {
+        return $this->model->buscarLeitoresComMaisAtrasos($limite);
+    }
     
     
 }

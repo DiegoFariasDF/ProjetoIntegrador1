@@ -14,6 +14,7 @@ switch ($pagina) {
         require_once "app/controllers/EmprestimoController.php";
         $controller = new EmprestimoController();
         $dados = $controller->listarEmprestimoGrafico(); 
+        $topLeitores = $controller->listarLeitoresComMaisAtrasos();
         include("app/views/home.php"); 
         break;
 

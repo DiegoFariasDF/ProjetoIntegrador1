@@ -70,26 +70,6 @@ class EmprestimoModel{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function buscarLeitoresComMaisAtrasos($limite = 5) {
-    $sql = "
-        SELECT l.nome, COUNT(*) AS total_atrasos
-        FROM emprestimo e
-        INNER JOIN leitores l ON e.leitor_id = l.id
-        WHERE e.status = 'emprestado' AND DATE_ADD(e.data_emprestimo, INTERVAL 15 DAY) < CURDATE()
-        GROUP BY e.leitor_id
-        ORDER BY total_atrasos DESC
-        LIMIT ?
-    ";
-
-    $stmt = $this->conexao->prepare($sql);
-    $stmt->bind_param("i", $limite);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    return $result->fetch_all(MYSQLI_ASSOC);
-}
-
-
     public function verificarEAtribuirAtrasos() {
         $sql = "SELECT id, data_emprestimo FROM emprestimo WHERE status = 'emprestado'";
         $result = $this->conexao->query($sql);
@@ -151,6 +131,34 @@ class EmprestimoModel{
         $stmt->bind_param("iss", $leitor_id, $livro, $data);
         return $stmt->execute();
     }
+    
+    public function buscarLeitoresComMaisAtrasos($limite = 5) {
+        $sql = "
+            SELECT l.nome, COUNT(*) AS qtd_atrasos
+            FROM emprestimo e
+            INNER JOIN leitores l ON e.leitor_id = l.id
+            WHERE e.atraso = 1
+            GROUP BY l.nome
+            ORDER BY qtd_atrasos DESC
+            LIMIT ?
+        ";
+    
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bind_param("i", $limite);
+        $stmt->execute();
+        $resultado = $stmt->get_result();
+    
+        $leitores = [];
+    
+        if ($resultado) {
+            while ($row = $resultado->fetch_assoc()) {
+                $leitores[] = $row;
+            }
+        }
+    
+        return $leitores;
+    }
+    
 }
 
 ?>

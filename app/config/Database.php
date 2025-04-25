@@ -24,6 +24,7 @@ class Database {
         $this->criarTabelas();
         $this->atualizarEstrutura();
         $this->inserirUsuarioAdmin();
+        $this->atualizarQtdAtrasos();
     }
 
     private function criarTabelas() {
@@ -79,6 +80,21 @@ class Database {
         $resultado = $this->conexao->query("SHOW COLUMNS FROM usuarios LIKE 'permissao'");
         if ($resultado->num_rows == 0) {
             $this->conexao->query("ALTER TABLE usuarios ADD COLUMN permissao VARCHAR(30) NOT NULL DEFAULT 'padrao'");
+        }
+    }
+
+    private function atualizarQtdAtrasos() {
+        $sql = "
+            UPDATE leitores l
+            SET qtd_atrasos = (
+                SELECT COUNT(*)
+                FROM emprestimo e
+                WHERE e.leitor_id = l.id AND e.atraso = 1
+            )
+        ";
+    
+        if (!$this->conexao->query($sql)) {
+            die("Erro ao atualizar quantidade de atrasos: " . $this->conexao->error);
         }
     }
 
