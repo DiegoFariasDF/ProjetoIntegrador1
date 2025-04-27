@@ -7,20 +7,25 @@
             <small class="d-block mb-3 text-muted"> &copy; Todos os direitos reservados Livro em Dia - Desenvolvido por Alunos da UNIVESP - 2025</small>
         </div>
         <div class="col-6 col-sm-6 col-md-3">
-            <h5>Features</h5>
+            <h5>Funcionalidades</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-decoration-none text-muted" href="#">Cool stuff</a></li>
-                <li><a class="text-decoration-none text-muted" href="#">Random feature</a></li>
-                <li><a class="text-decoration-none text-muted" href="#">Team feature</a></li>
-                <li><a class="text-decoration-none text-muted" href="#">Stuff for developers</a></li>
+                <li><a class="text-decoration-none text-muted" href="?pagina=adicionar_leitor">Cadastro de Leitores</a></li>
+                <li><a class="text-decoration-none text-muted" href="?pagina=emprestimo">Emprestimos Ativos</a></li>
+                <li><a class="text-decoration-none text-muted" href="?pagina=novo_emprestimo">Empréstimo de Livros</a></li>
+                <li><a class="text-decoration-none text-muted" href="?pagina=painel">Gerenciar Usuarios</a></li>
             </ul>
         </div>
         <div class="col-6 col-sm-6 col-md-3">
-            <h5>Resources</h5>
+            <h5>Responsáveis</h5>
             <ul class="list-unstyled text-small">
-                <li><a class="text-decoration-none text-muted" href="#">Resource</a></li>
-                <li><a class="text-decoration-none text-muted" href="#">Resource name</a></li>
-                <li><a class="text-decoration-none text-muted" href="#">Another resource</a></li>
+                <li><a class="text-decoration-none text-muted" href="https://univesp.br/" target="_blank">UNIVESP</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Diego Farias</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Emelly Rosa</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Jeferson Cardoso</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Nathan Maronez</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Victor Oliveira</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Vinicius Xavier</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Yasmim Graciano</a></li>
             </ul>
         </div>
         <div class="col-6 col-sm-6 col-md-3">

@@ -55,6 +55,18 @@ class UsuarioModel {
         return $stmt->execute();
     }
 
+    public function atualizarConta($id, $nome) {
+        $stmt = $this->conexao->prepare("UPDATE usuarios SET nome = ? WHERE id = ?");
+        $stmt->bind_param("si", $nome, $id);
+        return $stmt->execute();
+    }
+
+    public function atualizarSenha($id, $senhaCripto) {
+        $stmt = $this->conexao->prepare("UPDATE usuarios SET senha = ? WHERE id = ?");
+        $stmt->bind_param("si", $senhaCripto, $id); 
+        return $stmt->execute();
+    }
+
     public function excluirUsuario($id) {
         $sql = "DELETE from usuarios WHERE id = ?";
     

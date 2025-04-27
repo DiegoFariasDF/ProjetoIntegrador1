@@ -10,6 +10,8 @@
             <p>Registro realizado com sucesso!</p>
         <?php elseif ($status == 'fail'): ?>
             <p>Falha ao registrar. Tente novamente!</p>
+        <?php elseif ($status == 'senha'): ?>
+          <p>As senhas não coincidem!</p>
         <?php endif; ?>
       </div>
       <div class="modal-footer">

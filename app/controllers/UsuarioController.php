@@ -68,6 +68,74 @@ class UsuarioController {
         }
     }
 
+    public function editarConta() {
+        if (isset($_SESSION['usuario_id']) && is_numeric($_SESSION['usuario_id'])) {
+            $idConta = $_SESSION['usuario_id'];
+            $conta = $this->model->getUsuarioPorId($idConta);
+    
+            if (!$conta) {
+                echo "<p><strong>Usuário não encontrado.</strong></p>";
+                return;
+            }
+    
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $nome = $_POST['nome'];
+    
+                $atualizado = $this->model->atualizarConta($idConta, $nome);
+    
+                if ($atualizado) {
+                    header("Location: ?pagina=conta&status=success");
+                    exit;
+                } else {
+                    echo "<p><strong>Erro ao atualizar a conta.</strong></p>";
+                }
+            } else {
+                require 'app/views/conta.php';
+            }
+        } else {
+            echo "<p><strong>ID inválido.</strong></p>";
+        }
+    }
+
+    public function editarSenha(){
+        if (isset($_SESSION['usuario_id']) && is_numeric($_SESSION['usuario_id'])) {
+            $idConta = $_SESSION['usuario_id'];
+            $conta = $this->model->getUsuarioPorId($idConta);
+    
+            if (!$conta) {
+                echo "<p><strong>Usuário não encontrado.</strong></p>";
+                return;
+            }
+    
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $senha = $_POST['nova-senha'];
+                $confirmarSenha = $_POST['confirmar-senha'];
+
+                if ($senha !== $confirmarSenha) {
+                    header("Location: ?pagina=conta&status=senha");
+                    return;
+                }
+
+                $senhaCripto = password_hash($senha, PASSWORD_DEFAULT);
+
+                $atualizado = $this->model->atualizarSenha($idConta, $senhaCripto);
+    
+                if ($atualizado) {
+                    header("Location: ?pagina=conta&status=success");
+                    exit;
+                } else {
+                    header("Location: ?pagina=conta&status=fail");
+                }
+            } else {
+                require 'app/views/alterarSenha.php';
+            }
+        } else {
+            echo "<p><strong>ID inválido.</strong></p>";
+        }
+    }
+    
+    
+
     public function editarUsuario() {
         if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             $idUsuario = $_GET['id'];

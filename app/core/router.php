@@ -118,6 +118,19 @@ switch ($pagina) {
         $controller->editarUsuario();
         break;
 
+    case "conta":
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        $controller->editarConta();
+        break;
+
+    case "alterar_senha":
+        require_once "app/controllers/UsuarioController.php";
+        $controller = new UsuarioController();
+        $controller->editarSenha();
+        break;
+
+
     case "excluir_usuario":
         require_once "app/controllers/UsuarioController.php";
         $controller = new UsuarioController();
