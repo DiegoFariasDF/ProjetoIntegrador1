@@ -37,15 +37,26 @@
                             <a class=\"nav-link\" href=\"?pagina=login\">Login</a>
                           </li>";
                 } else {
-                    
-                    $id = md5($_SESSION['usuario_id']); 
-                    $tipo_usuario = strtolower($_SESSION['usuario_nome']); 
-                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Home</a></li>";
-                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=leitores\" class=\"nav-link\">Leitores</a></li>";
-                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=emprestimo\" class=\"nav-link\">Emprestimo</a></li>";
-                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=painel\" class=\"nav-link\">Painel</a></li>";
-                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=conta\" class=\"nav-link\">Conta</a></li>";
-                    echo "<li class=\"nav-item me-3\"><a href=\"?pagina=logout\" class=\"nav-link\">Sair</a></li>";
+					
+					if($_SESSION['usuario_permissao'] == 'admin'){
+						$id = md5($_SESSION['usuario_id']); 
+						$tipo_usuario = strtolower($_SESSION['usuario_nome']); 
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Home</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=leitores\" class=\"nav-link\">Leitores</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=emprestimo\" class=\"nav-link\">Emprestimo</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=painel\" class=\"nav-link\">Painel</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=conta\" class=\"nav-link\">Conta</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=logout\" class=\"nav-link\">Sair</a></li>";
+					}
+					elseif($_SESSION['usuario_permissao'] == 'padrao'){
+						$id = md5($_SESSION['usuario_id']); 
+						$tipo_usuario = strtolower($_SESSION['usuario_nome']); 
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Home</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=leitores\" class=\"nav-link\">Leitores</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=emprestimo\" class=\"nav-link\">Emprestimo</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=conta\" class=\"nav-link\">Conta</a></li>";
+						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=logout\" class=\"nav-link\">Sair</a></li>";
+					}
                 }
             ?>
             

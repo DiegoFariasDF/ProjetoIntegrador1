@@ -35,7 +35,7 @@ $pagina_atual = $_GET['pagina'] ?? '';
 
 $permissoes = [
     'admin' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo', 'painel', 'adicionar_usuario', 'editar_usuario', 'conta', 'alterar_senha'],
-    'padrao' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo', 'painel', 'conta', 'alterar_senha']
+    'padrao' => ['home', 'leitores', 'adicionar_leitor', 'editar_leitor', 'leitor', 'emprestimo', 'novo_emprestimo', 'conta', 'alterar_senha']
 ];
 
 
