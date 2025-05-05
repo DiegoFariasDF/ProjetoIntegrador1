@@ -6,29 +6,28 @@ class EmprestimoController {
     public function __construct() {
         $this->model = new EmprestimoModel();
     }
+
     public function listarEmprestimo(){
-        $this->model->verificarEAtribuirAtrasos();
+    $this->model->verificarEAtribuirAtrasos();
 
-        $totalEmprestimos = $this->model->contarEmprestimos();
-        $totalEmprestimosRegular = $this->model->contarEmprestimosRegular();
-        $totalAtrasos = $this->model->contarAtrasos();
-        $emprestimos = $this->model->listarEmprestimo();
-        $emprestimosVencidos = 0;
+    $totalEmprestimos = $this->model->contarEmprestimos();
+    $totalEmprestimosRegular = $this->model->contarEmprestimosRegular();
+    $totalAtrasos = $this->model->contarAtrasos();
+    $emprestimos = $this->model->listarEmprestimo();
 
+    $dataHoje = new DateTime();
+    foreach ($emprestimos as &$emprestimo) {
+        $dataEmprestimo = new DateTime($emprestimo['data_emprestimo']);
+        $dataEmprestimo->modify('+15 days');
 
-        foreach ($emprestimos as &$emprestimo) {
-            $dataEmprestimo = new DateTime($emprestimo['data_emprestimo']);
-            $dataEmprestimo->modify('+15 days');
-            $emprestimo['data_devolucao'] = $dataEmprestimo->format('d/m/Y');
-            $dataAtual = new DateTime();
-
-            if ($dataEmprestimo < $dataAtual) {
-                $emprestimosVencidos++;
-            }
-        }
-
-        require 'app/views/emprestimo.php';
+        $emprestimo['data_devolucao_formatada'] = $dataEmprestimo->format('d/m/Y'); // para exibir
+        $emprestimo['data_devolucao'] = $dataEmprestimo->format('Y-m-d'); // para lógica
+        $emprestimo['status'] = $dataEmprestimo < $dataHoje ? 'atrasado' : 'ativo';
     }
+
+    require 'app/views/emprestimo.php';
+    }
+
 
     public function listarEmprestimoGrafico() {
         $totalEmprestimosAnual = $this->model->contarEmprestimosTotalAnual();
