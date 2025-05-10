@@ -8,11 +8,28 @@
 
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" value="<?= htmlspecialchars($usuario['nome']) ?>" required>
+                <input type="text"
+                class="form-control"
+                id="nome"
+                name="nome"
+                maxlength="60"
+                pattern="^[A-Za-zÀ-ÿ\s]+$"
+                oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"
+                value="<?= htmlspecialchars($usuario['nome']) ?>"
+                required>
             </div>
 			<div class="mb-3">
                 <label for="usuario" class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="usuario" name="usuario" value="<?= htmlspecialchars($usuario['usuario']) ?>" required>
+
+                <input type="text"
+                class="form-control"
+                id="usuario"
+                name="usuario"
+                maxlength="60"
+                pattern="^[A-Za-zÀ-ÿ\s.]+$"
+                oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s.]/g, '')"
+                value="<?= htmlspecialchars($usuario['usuario']) ?>"
+                required>
             </div>
 			<div class="mb-3">
 				<label for="permissao" class="form-label">Permissão</label>

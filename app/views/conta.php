@@ -13,7 +13,16 @@
 
                     <div class="mb-3">
                         <label for="nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="nome" name="nome" value="<?= htmlspecialchars($conta['nome']) ?>" required>
+                        
+                        <input type="text"
+                        class="form-control"
+                        id="nome"
+                        name="nome"
+                        maxlength="60"
+                        pattern="^[A-Za-zÀ-ÿ\s]+$"
+                        oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"
+                        value="<?= htmlspecialchars($conta['nome']) ?>"
+                        required>
                     </div>
 
                     <button type="submit" class="btn btn-dark">Salvar Alterações</button>

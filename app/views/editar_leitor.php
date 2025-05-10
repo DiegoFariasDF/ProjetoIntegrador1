@@ -8,12 +8,30 @@
 
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
-                <input type="text" class="form-control" id="nome" name="nome" value="<?= htmlspecialchars($leitor['nome']) ?>" required>
+                <input type="text"
+                class="form-control"
+                id="nome"
+                name="nome"
+                maxlength="60"
+                pattern="^[A-Za-zÀ-ÿ\s]+$"
+                oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"
+                value="<?= htmlspecialchars($leitor['nome']) ?>"                    
+                required>
             </div>
 
             <div class="mb-3">
                 <label for="telefone" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="telefone" name="telefone" value="<?= htmlspecialchars($leitor['telefone']) ?>" required>
+                
+                <input type="tel"
+                    class="form-control"
+                    id="telefone"
+                    name="telefone"
+                    pattern="^[0-9]{11}$"
+                    maxlength="11"
+                    inputmode="numeric"
+                    value="<?= htmlspecialchars($leitor['telefone']) ?>"
+                    required
+                    oninput="this.value = this.value.replace(/[^0-9]/g, '')">
             </div>
 
             <button type="submit" class="btn btn-dark">Salvar Alterações</button>

@@ -10,7 +10,16 @@
             <form action="?pagina=salvar_usuario" method="POST">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required>
+                    
+                    <input type="text"
+                    class="form-control"
+                    id="nome"
+                    name="nome"
+                    maxlength="60"
+                    pattern="^[A-Za-zÀ-ÿ\s]+$"
+                    oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ\s]/g, '')"
+                    placeholder="Digite o nome completo"
+                    required>
                 </div>
                 <div class="mb-3">
                     <label for="permissao" class="form-label">Permissão</label>

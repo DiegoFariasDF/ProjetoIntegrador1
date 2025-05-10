@@ -24,7 +24,15 @@
 
                 <div class="mb-3">
                     <label for="livro" class="form-label">Livro:</label>
-                    <input type="text" class="form-control" id="livro" name="livro" required>
+                    <input type="text"
+                    class="form-control"
+                    id="livro"
+                    name="livro"
+                    maxlength="60"
+                    pattern="^[A-Za-zÀ-ÿ0-9\s]+$"
+                    oninput="this.value = this.value.replace(/[^A-Za-zÀ-ÿ0-9\s]/g, '')"
+                    placeholder="Nome do livro"
+                    required>
                 </div>
 
                 <button type="submit" class="btn btn-dark">Registrar Empréstimo</button>
