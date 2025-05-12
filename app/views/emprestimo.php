@@ -63,6 +63,23 @@
                         <td><?= htmlspecialchars($emprestimos['livro']) ?></td>
                         <td><?= htmlspecialchars($emprestimos['data_devolucao_formatada']) ?></td>
                         <td>
+
+                        <?php
+                            $hoje = new DateTime();
+                            $dataDevolucao = new DateTime($emprestimos['data_devolucao']);
+                            $diferenca = $hoje->diff($dataDevolucao);
+                            $dias = $diferenca->days;
+                            $atrasado = $dataDevolucao < $hoje;
+
+                            if ($atrasado) {
+                                $mensagem = "Olá, estou entrando em contato para lembrar que o livro " . $emprestimos['livro'] . " está com a devolução atrasada. Por favor, devolva o mais rápido possível. Agradeço!";
+                            } else {
+                                $mensagem = "Olá, estou entrando em contato para lembrar que faltam $dias dias para a devolução do livro " . $emprestimos['livro'] . ". Só um lembrete.";
+                            }
+
+                            $mensagemEncoded = urlencode($mensagem);
+                            $linkWhatsapp = "https://api.whatsapp.com/send/?phone=55{$emprestimos['telefone']}&text={$mensagemEncoded}";
+                        ?>
                             <!-- mobile -->
                             <div class="dropdown dropstart d-md-none">
                                 <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
@@ -71,7 +88,8 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item btn-renovar" href="?pagina=renovar_emprestimo&id=<?= $emprestimos['id'] ?>">Renovar</a></li>
                                     <li><a class="dropdown-item btn-finalizar" href="?pagina=finalizar_emprestimo&id=<?= $emprestimos['id'] ?>">Finalizar</a></li>
-                                    <li><a class="dropdown-item" href="https://api.whatsapp.com/send/?phone=55<?= $emprestimos['telefone'] ?>&text=Ol%C3%A1%2C%20estou%20entrando%20em%20contato%20para%20lembrar%20que%20o%20livro%20<?= urlencode($emprestimo['livro']) ?>%20est%C3%A1%20com%20a%20devolu%C3%A7%C3%A3o%20atrasada.%20Por%20favor%2C%20devolva%20o%20mais%20r%C3%A1pido%20poss%C3%ADvel.%20Agrade%C3%A7o%21" target="_blank">Mensagem</a></li>
+                                    <li> <a class="dropdown-item" href="<?= $linkWhatsapp ?>" target="_blank">Mensagem</a></li>
+                                   
                                 </ul>
                             </div>
 
@@ -79,7 +97,7 @@
                             <div class="d-none d-md-flex gap-2">
                                 <a class="btn btn-secondary btn-sm btn-renovar" href="?pagina=renovar_emprestimo&id=<?= $emprestimos['id'] ?>">Renovar</a>
                                 <a class="btn btn-dark btn-sm btn-finalizar" href="?pagina=finalizar_emprestimo&id=<?= $emprestimos['id'] ?>">Finalizar</a>
-                                <a class="btn btn-success btn-sm" href="https://api.whatsapp.com/send/?phone=55<?= $emprestimos['telefone'] ?>&text=Ol%C3%A1%2C%20estou%20entrando%20em%20contato%20para%20lembrar%20que%20o%20livro%20<?= urlencode($emprestimo['livro']) ?>%20est%C3%A1%20com%20a%20devolu%C3%A7%C3%A3o%20atrasada.%20Por%20favor%2C%20devolva%20o%20mais%20r%C3%A1pido%20poss%C3%ADvel.%20Agrade%C3%A7o%21" target="_blank">Mensagem</a>
+                                <a class="btn btn-success btn-sm" href="<?= $linkWhatsapp ?>" target="_blank">Mensagem</a>
                             </div>
                         </td>
                     </tr>
