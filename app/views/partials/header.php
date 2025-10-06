@@ -33,9 +33,11 @@
             <?php
                 if (!isset($_SESSION['usuario_nome'])) {
                     
+                    echo "<li class=\"nav-item me-3\"><a class=\"nav-link\" href=\"?pagina=googlebooks\"> Pesquisar Livros</a></li>";
                     echo "<li class=\"nav-item me-3\">
                             <a class=\"nav-link\" href=\"?pagina=login\">Login</a>
                           </li>";
+                    
                 } else {
 					
 					if($_SESSION['usuario_permissao'] == 'admin'){
@@ -44,7 +46,8 @@
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Home</a></li>";
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=leitores\" class=\"nav-link\">Leitores</a></li>";
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=emprestimo\" class=\"nav-link\">Emprestimo</a></li>";
-						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=painel\" class=\"nav-link\">Painel</a></li>";
+						echo "<li class=\"nav-item me-3\"><a class=\"nav-link\" href=\"?pagina=googlebooks\"> Pesquisar Livros</a></li>";
+                        echo "<li class=\"nav-item me-3\"><a href=\"?pagina=painel\" class=\"nav-link\">Painel</a></li>";
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=conta\" class=\"nav-link\">Conta</a></li>";
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=logout\" class=\"nav-link\">Sair</a></li>";
 					}
@@ -54,7 +57,8 @@
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=home\" class=\"nav-link\">Home</a></li>";
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=leitores\" class=\"nav-link\">Leitores</a></li>";
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=emprestimo\" class=\"nav-link\">Emprestimo</a></li>";
-						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=conta\" class=\"nav-link\">Conta</a></li>";
+						echo "<li class=\"nav-item me-3\"><a class=\"nav-link\" href=\"?pagina=googlebooks\"> Pesquisar Livros</a></li>";
+                        echo "<li class=\"nav-item me-3\"><a href=\"?pagina=conta\" class=\"nav-link\">Conta</a></li>";
 						echo "<li class=\"nav-item me-3\"><a href=\"?pagina=logout\" class=\"nav-link\">Sair</a></li>";
 					}
                 }

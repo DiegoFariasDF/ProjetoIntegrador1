@@ -146,6 +146,12 @@ switch ($pagina) {
             $controller->resetarSenha($_GET['id']);
         }
         break;
+    
+    case "googlebooks":
+        require_once "app/controllers/GoogleBooksController.php";
+        $controller = new \app\controllers\GoogleBooksController();
+        $controller->index();
+        break;
 
 
     default:
