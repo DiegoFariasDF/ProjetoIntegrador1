@@ -19,7 +19,8 @@
             <h5>Responsáveis</h5>
             <ul class="list-unstyled text-small">
                 <li><a class="text-decoration-none text-muted" href="https://univesp.br/" target="_blank">UNIVESP</a></li>
-                <li><a class="text-decoration-none text-muted" href="#">Diego Farias</a></li>
+                <li><a class="text-decoration-none text-muted" href="#">Anthony Pablo Paulino de Souza</a></li>
+                <li><a class="text-decoration-none text-muted" href="diegofarias.dev.br">Diego Farias</a></li>
                 <li><a class="text-decoration-none text-muted" href="#">Emelly Rosa</a></li>
                 <li><a class="text-decoration-none text-muted" href="#">Jeferson Cardoso</a></li>
                 <li><a class="text-decoration-none text-muted" href="#">Nathan Maronez</a></li>
